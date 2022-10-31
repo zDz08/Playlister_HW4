@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../auth'
+import MUIAccountErrorModal from './MUIAccountErrorModal'
 import Copyright from './Copyright'
 
 import Avatar from '@mui/material/Avatar';
@@ -117,6 +118,7 @@ export default function RegisterScreen() {
                             </Grid>
                         </Grid>
                     </Box>
+                    <MUIAccountErrorModal />
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
             </Container>

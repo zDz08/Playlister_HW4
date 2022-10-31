@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../auth'
+import MUIAccountErrorModal from './MUIAccountErrorModal'
 
 import Copyright from './Copyright'
 
@@ -109,6 +110,7 @@ export default function LoginScreen() {
                         </Grid>
                         <Copyright sx={{ mt: 5 }} />
                     </Box>
+                    <MUIAccountErrorModal />
                 </Box>
             </Grid>
         </Grid>

@@ -28,6 +28,10 @@ export const loginUser = (email, password) => {
     return api.post(`/login/`, {
         email : email,
         password : password
+    }).catch(function (error) {
+        if (error.response) {
+            return error.response.data.errorMessage;
+        }
     })
 }
 export const logoutUser = () => api.get(`/logout/`)
@@ -38,6 +42,10 @@ export const registerUser = (firstName, lastName, email, password, passwordVerif
         email : email,
         password : password,
         passwordVerify : passwordVerify
+    }).catch(function (error) {
+        if (error.response) {
+            return error.response.data.errorMessage;
+        }
     })
 }
 const apis = {

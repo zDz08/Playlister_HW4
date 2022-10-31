@@ -10,13 +10,16 @@ export const AuthActionType = {
     GET_LOGGED_IN: "GET_LOGGED_IN",
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
-    REGISTER_USER: "REGISTER_USER"
+    REGISTER_USER: "REGISTER_USER",
+    HIDE_MODAL: "HIDE_MODAL"
 }
 
 function AuthContextProvider(props) {
     const [auth, setAuth] = useState({
         user: null,
-        loggedIn: false
+        loggedIn: false,
+        error: false,
+        errorMessage: null
     });
     const history = useHistory();
 
@@ -36,7 +39,9 @@ function AuthContextProvider(props) {
             case AuthActionType.LOGIN_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    error: payload.error,
+                    errorMessage: payload.errorMessage
                 })
             }
             case AuthActionType.LOGOUT_USER: {
@@ -48,7 +53,17 @@ function AuthContextProvider(props) {
             case AuthActionType.REGISTER_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    error: payload.error,
+                    errorMessage: payload.errorMessage
+                })
+            }
+            case AuthActionType.HIDE_MODAL: {
+                return setAuth({
+                    user: null,
+                    loggedIn: false,
+                    error: false,
+                    errorMessage: null
                 })
             }
             default:
@@ -71,25 +86,51 @@ function AuthContextProvider(props) {
 
     auth.registerUser = async function(firstName, lastName, email, password, passwordVerify) {
         const response = await api.registerUser(firstName, lastName, email, password, passwordVerify);      
-        if (response.status === 200) {
+        if(response.status === undefined) {
             authReducer({
                 type: AuthActionType.REGISTER_USER,
                 payload: {
-                    user: response.data.user
+                    user: null,
+                    error:true,
+                    errorMessage:response
+                }
+            })
+            console.log(response);
+        }
+        else if (response.status === 200) {
+            authReducer({
+                type: AuthActionType.REGISTER_USER,
+                payload: {
+                    user: response.data.user,
+                    error: false,
+                    errorMessage:null
                 }
             })
             history.push("/login");
+            auth.loginUser(email, password);
         }
-        auth.loginUser(email, password);
     }
 
     auth.loginUser = async function(email, password) {
         const response = await api.loginUser(email, password);
-        if (response.status === 200) {
+
+        if(response.status === undefined) {
             authReducer({
                 type: AuthActionType.LOGIN_USER,
                 payload: {
-                    user: response.data.user
+                    user: null,
+                    error:true,
+                    errorMessage:response
+                }
+            })
+        }
+        else if (response.status === 200) {
+            authReducer({
+                type: AuthActionType.LOGIN_USER,
+                payload: {
+                    user: response.data.user,
+                    error:false,
+                    errorMessage:null
                 }
             })
             history.push("/");
@@ -115,6 +156,13 @@ function AuthContextProvider(props) {
         }
         console.log("user initials: " + initials);
         return initials;
+    }
+
+    auth.hideModal = function() {
+        authReducer({
+            type: AuthActionType.HIDE_MODAL,
+            payload: {}
+        })
     }
 
     return (
