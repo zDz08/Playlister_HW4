@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { GlobalStoreContext } from '../store'
+import { useHistory } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -14,6 +15,7 @@ import CloseIcon from '@mui/icons-material/HighlightOff';
 */
 function EditToolbar() {
     const { store } = useContext(GlobalStoreContext);
+    const history = useHistory();
 
     function handleAddNewSong() {
         store.addNewSong();
@@ -25,6 +27,7 @@ function EditToolbar() {
         store.redo();
     }
     function handleClose() {
+        history.push("/");
         store.closeCurrentList();
     }
     return (
