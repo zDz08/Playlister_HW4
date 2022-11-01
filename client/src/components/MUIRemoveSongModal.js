@@ -10,8 +10,9 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    height: 100,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '5px solid #0066CC',
     boxShadow: 24,
     p: 4,
 };
@@ -38,7 +39,7 @@ export default function MUIRemoveSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.currentSong !== null}
         >
             <Box sx={style}>
             <div
@@ -47,7 +48,7 @@ export default function MUIRemoveSongModal() {
         data-animation="slideInOutLeft">
         <div className="modal-root" id='verify-remove-song-root'>
             <div className="modal-north">
-                Remove {songTitle}?
+                <h2>Remove {songTitle}?</h2>
             </div>
             <div className="modal-center">
                 <div className="modal-center-content">

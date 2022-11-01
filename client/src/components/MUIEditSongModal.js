@@ -10,8 +10,9 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    height: 250,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '5px solid #0066CC',
     boxShadow: 24,
     p: 4,
 };
@@ -49,7 +50,7 @@ export default function MUIEditSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.currentSong!== null}
         >
             <Box sx={style}>
             <div
@@ -61,7 +62,7 @@ export default function MUIEditSongModal() {
                 className="modal-root">
                 <div
                     id="edit-song-modal-header"
-                    className="modal-north">Edit Song</div>
+                    className="modal-north"><h2>Edit Song</h2></div>
                 <div
                     id="edit-song-modal-content"
                     className="modal-center">

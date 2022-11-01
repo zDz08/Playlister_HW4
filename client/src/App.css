@@ -189,6 +189,7 @@ body {
 .list-card-button {
   float: right;
   transform: scale(2);
+  font-size: 16px;
 }
 
 #workspace-home,
@@ -273,6 +274,7 @@ input {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  margin-bottom: 1rem;
   background: var(--black);
   color: var(--swatch-text);
   cursor: pointer;
@@ -331,6 +333,10 @@ input {
 
 .dialog-header {
   font-size: 24pt;
+}
+
+.modal-button {
+  margin-top: 1rem;
 }
 
 #close-modal-button {
