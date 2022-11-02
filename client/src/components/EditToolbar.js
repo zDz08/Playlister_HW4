@@ -30,8 +30,19 @@ function EditToolbar() {
         history.push("/");
         store.closeCurrentList();
     }
+
+    function handleKeyDown(event) {
+        console.log("key press");
+        if(event.ctrlKey) {
+            if(event.key === 'z')
+                store.undo();
+            if(event.key === 'y')
+                store.redo();
+        }
+    }
+
     return (
-        <div id="edit-toolbar">
+        <div id="edit-toolbar" tabIndex="-1" onKeyDown={handleKeyDown}>
             <Button
                 disabled={!store.canAddNewSong()}
                 id='add-song-button'

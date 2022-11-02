@@ -23,8 +23,19 @@ function WorkspaceScreen() {
     else if (store.isRemoveSongModalOpen()) {
         modalJSX = <MUIRemoveSongModal />;
     }
+
+    function handleKeyDown(event) {
+        console.log("key press");
+        if(event.ctrlKey) {
+            if(event.key === 'z')
+                store.undo();
+            if(event.key === 'y')
+                store.redo();
+        }
+    }
+
     return (
-        <Box>
+        <Box tabIndex="-1" onKeyDown={handleKeyDown}>
         <List 
             id="playlist-cards" 
             sx={{ width: '100%', bgcolor: 'background.paper' }}
