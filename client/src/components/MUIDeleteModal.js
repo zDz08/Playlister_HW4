@@ -10,8 +10,9 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    height: 100,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '5px solid #0066CC',
     boxShadow: 24,
     p: 4,
 };
@@ -34,7 +35,7 @@ export default function MUIDeleteModal() {
             open={store.listMarkedForDeletion !== null}
         >
             <Box sx={style}>
-                <div className="modal-dialog">
+                <div className="delete-list-modal">
                 <header className="dialog-header">
                     Delete the {name} Top 5 List?
                 </header>

@@ -57,7 +57,12 @@ function ListCard(props) {
     function handleKeyPress(event) {
         if (event.code === "Enter") {
             let id = event.target.id.substring("list-".length);
-            store.changeListName(id, text);
+            if(text === "") {
+                store.changeListName(id, idNamePair.name);
+            }
+            else{
+                store.changeListName(id, text);
+            }
             toggleEdit();
         }
     }
@@ -77,7 +82,7 @@ function ListCard(props) {
         <ListItem
             id={idNamePair._id}
             key={idNamePair._id}
-            sx={{ marginTop: '15px', display: 'flex', p: 1 }}
+            sx={{ marginTop: '15px', display: 'flex', p: 1, bgcolor:'#a9e6ff' }}
             style={{ width: '100%', fontSize: '48pt' }}
             button
             onClick={(event) => {
